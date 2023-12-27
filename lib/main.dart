@@ -22,9 +22,9 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       translations: LanguageTranslation(),
       fallbackLocale: Locale('km', 'KH'),
-      locale: Get.deviceLocale,
+      locale: Locale('km', 'KH'),
       debugShowCheckedModeBanner: false, 
-      title: 'Point Of Sale',
+      title: 'Point Of Sale'.tr,
       home: Scaffold(
           body: Column(
         children: [

@@ -18,8 +18,8 @@ class Sidebar extends StatelessWidget {
             return ListTile(
                 title: InkWell(
               onTap: () {
-                // Handle the tap gesture here
-                onPressed: () => Get.updateLocale(const Locale('km', 'KH'));
+                print("lange has been change to en");
+                Get.updateLocale(const Locale('en', 'US'));
               },
               child: Row(
                 children: [
@@ -32,7 +32,7 @@ class Sidebar extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(items[index]["title"].toString()),
+                  Text(items[index]["title"].toString().tr),
                 ],
               ),
             ));
