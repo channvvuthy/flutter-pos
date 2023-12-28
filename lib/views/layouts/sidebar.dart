@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, deprecated_member_use
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,32 +11,71 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.blue,
-        child: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-                title: InkWell(
-              onTap: () {
-                print("lange has been change to en");
-                Get.updateLocale(const Locale('en', 'US'));
-              },
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    items[index]["icon"].toString(),
-                    width: 20,
-                    height: 20,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(items[index]["title"].toString().tr),
-                ],
-              ),
-            ));
-          },
-        ));
+      width: 300,
+      color: Colors.amber,
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+
+          return item.containsKey("child")
+              ? _buildMenuTree(item)
+              : _buildMenu(item);
+        },
+      ),
+    );
+  }
+
+  Widget _buildMenu(Map<String, dynamic> item) {
+    return ListTile(
+      title: InkWell(
+        onTap: () {
+          // Handle main item tap
+          Get.updateLocale(const Locale('en', 'US'));
+        },
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              item["icon"].toString(),
+              width: 20,
+              height: 20,
+              color: Colors.black,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(item["title"].toString().tr),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuTree(Map<String, dynamic> item) {
+    return ExpansionTile(
+      title: InkWell(
+        onTap: () {
+          // Handle main item tap
+          Get.updateLocale(const Locale('en', 'US'));
+        },
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              item["icon"].toString(),
+              width: 20,
+              height: 20,
+              color: Colors.black,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(item["title"].toString().tr),
+          ],
+        ),
+      ),
+      children: (item["child"] as List<Map<String, dynamic>>).map((subItem) {
+        return _buildMenu(subItem);
+      }).toList(),
+    );
   }
 }
