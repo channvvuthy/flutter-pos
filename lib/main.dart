@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pos/components/avatar.dart';
 import 'package:pos/language_translation.dart';
 import 'package:pos/views/layouts/sidebar.dart';
 
@@ -20,33 +21,33 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      translations: LanguageTranslation(),
-      fallbackLocale: Locale('km', 'KH'),
-      locale: Locale('km', 'KH'),
-      debugShowCheckedModeBanner: false, 
-      title: 'Point Of Sale'.tr,
-      home: Scaffold(
-          body: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Sidebar(),
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.green,
-                    child: Center(
-                      child: Text('Home'.tr),
+        translations: LanguageTranslation(),
+        fallbackLocale: Locale('km', 'KH'),
+        locale: Locale('km', 'KH'),
+        debugShowCheckedModeBanner: false,
+        title: 'Point Of Sale'.tr,
+        home: Scaffold(
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              return Row(
+                children: [
+                  // Left Sidebar
+                  SizedBox(
+                    width: 300.0,
+                    height: constraints.maxHeight,
+                    child: Sidebar(),
+                  ),
+                  // Main Content Area
+                  Expanded(
+                    child: Container(
+                      color: Colors.grey,
+                      // Add your main content here
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              );
+            },
           ),
-        ],
-      )),
-    );
+        ));
   }
 }
