@@ -1,12 +1,24 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/components/avatar.dart';
 import 'package:pos/language_translation.dart';
+import 'package:pos/views/layouts/navbar.dart';
 import 'package:pos/views/layouts/sidebar.dart';
+import 'package:window_manager/window_manager.dart';
+import 'constants/color.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+  windowManager.waitUntilReadyToShow().then((_) async {
+// Hide window title bar
+    await windowManager.setFullScreen(true);
+    await windowManager.center();
+    await windowManager.show();
+    await windowManager.setSkipTaskbar(false);
+  });
+
   runApp(const MyApp());
 }
 
@@ -40,7 +52,10 @@ class _MyAppState extends State<MyApp> {
                   // Main Content Area
                   Expanded(
                     child: Container(
-                      color: Colors.grey,
+                      color: bgContent,
+                      child: Column(children: [
+                        Navbar()
+                      ],),
                       // Add your main content here
                     ),
                   ),

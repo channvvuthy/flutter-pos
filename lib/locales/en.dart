@@ -3,7 +3,7 @@ class EnLocalization {
     return {
       'Home': 'Home',
       'Product': 'Product',
-      'Point Of Sale': 'Point Of Sale',
+      'Point Of Sale': 'POS System',
       'Category': 'Category',
       'Brand': 'Brand',
       'Master Data': 'Master Data',
