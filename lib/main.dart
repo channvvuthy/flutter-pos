@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pos/components/retangle.dart';
+import 'package:pos/components/rectangle.dart';
 import 'package:pos/components/title.dart';
+import 'package:pos/data/report_summary.dart';
 import 'package:pos/language_translation.dart';
 import 'package:pos/views/layouts/navbar.dart';
 import 'package:pos/views/layouts/sidebar.dart';
@@ -57,12 +58,31 @@ class _MyAppState extends State<MyApp> {
                             child: title("Dashboard"),
                           ),
                           Container(
-                              color: Colors.blue,
-                              child: Rectangle(
-                                total: 150,
-                                description: "New orders",
-                                assetIcon: 'assets/icons/bag.svg',
-                              ))
+                            padding: EdgeInsets.only(left: 15, right: 15),
+                            height: 127,
+                            child: GridView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                // Number of columns
+                                crossAxisSpacing: 15.0,
+                                // Spacing between columns
+                                mainAxisSpacing: 15.0, // Spacing between rows
+                              ),
+                              itemCount: reportSummaries.length, // Number of rectangles
+                              itemBuilder: (BuildContext context, int index) {
+                                final item = reportSummaries[index];
+                                return Rectangle(
+                                  total: int.parse(item['total'].toString()),
+                                  description: item['description'].toString(),
+                                  bgColor:  Color(int.parse('0xFF${item['bgColor']}')),
+                                  footerColor:  Color(int.parse('0xFF${item['footerColor']}')),
+                                  assetIcon: item['icon'].toString(),
+                                );
+                              },
+                            ),
+                          )
                         ],
                       ),
                       // Add your main content here

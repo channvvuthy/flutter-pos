@@ -58,8 +58,8 @@ class Rectangle extends StatelessWidget {
               Expanded(
                   child: SvgPicture.asset(
                 assetIcon,
-                width: 50,
-                height: 50,
+                width: 60,
+                height: 60,
               ))
             ],
           ),
