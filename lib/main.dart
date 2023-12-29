@@ -12,11 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   windowManager.waitUntilReadyToShow().then((_) async {
-// Hide window title bar
-    await windowManager.setFullScreen(true);
-    await windowManager.center();
-    await windowManager.show();
-    await windowManager.setSkipTaskbar(false);
   });
 
   runApp(const MyApp());
