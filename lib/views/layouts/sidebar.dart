@@ -50,20 +50,16 @@ class Sidebar extends StatelessWidget {
           ),
           _divider(),
           Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: SizedBox(
-                width: 300,
-                child: ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    final item = items[index];
+            child: SizedBox(
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
 
-                    return item.containsKey("child")
-                        ? _buildMenuTree(item)
-                        : _buildMenu(item);
-                  },
-                ),
+                  return item.containsKey("child")
+                      ? _buildMenuTree(item)
+                      : _buildMenu(item);
+                },
               ),
             ),
           ),
@@ -77,7 +73,6 @@ class Sidebar extends StatelessWidget {
       title: InkWell(
         onTap: () {
           // Handle main item tap
-          Get.updateLocale(const Locale('en', 'US'));
         },
         child: Row(
           children: [
@@ -104,7 +99,6 @@ class Sidebar extends StatelessWidget {
     return InkWell(
       onTap: () {
         // Handle main item tap
-        Get.updateLocale(const Locale('en', 'US'));
       },
       child: ExpansionTile(
         title: Row(

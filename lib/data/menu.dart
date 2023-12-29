@@ -54,10 +54,6 @@ const items = [
         "icon": 'assets/icons/circle.svg',
       },
       {
-        "title": "Sales by Employee",
-        "icon": 'assets/icons/circle.svg',
-      },
-      {
         "title": "Inventory Report",
         "icon": 'assets/icons/circle.svg',
       },

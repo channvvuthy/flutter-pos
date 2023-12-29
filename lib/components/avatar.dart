@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
   final String imageUrl;

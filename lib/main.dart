@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pos/components/retangle.dart';
+import 'package:pos/components/title.dart';
 import 'package:pos/language_translation.dart';
 import 'package:pos/views/layouts/navbar.dart';
 import 'package:pos/views/layouts/sidebar.dart';
@@ -12,11 +14,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   windowManager.waitUntilReadyToShow().then((_) async {
-// Hide window title bar
-    await windowManager.setFullScreen(true);
-    await windowManager.center();
-    await windowManager.show();
-    await windowManager.setSkipTaskbar(false);
+    await windowManager.maximize();
+    await windowManager.setTitle('Point Of Sale'.tr);
   });
 
   runApp(const MyApp());
@@ -44,18 +43,28 @@ class _MyAppState extends State<MyApp> {
               return Row(
                 children: [
                   // Left Sidebar
-                  SizedBox(
-                    width: 300.0,
-                    height: constraints.maxHeight,
-                    child: Sidebar(),
-                  ),
+                  SizedBox(width: 300, child: Sidebar()),
                   // Main Content Area
                   Expanded(
                     child: Container(
                       color: bgContent,
-                      child: Column(children: [
-                        Navbar()
-                      ],),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Navbar(),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: title("Dashboard"),
+                          ),
+                          Container(
+                              color: Colors.blue,
+                              child: Rectangle(
+                                total: 150,
+                                description: "New orders",
+                                assetIcon: 'assets/icons/bag.svg',
+                              ))
+                        ],
+                      ),
                       // Add your main content here
                     ),
                   ),
